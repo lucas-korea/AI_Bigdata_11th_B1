@@ -5,10 +5,15 @@ from utils.utils import *
 import multiprocessing
 
 # def get_coordinate():
+global xy
 
+def get_xy():
+    global xy
+    return xy[-1]
 
 def detect(save_img=False,):
-    total = 0
+    global xy
+    xy = []
 
     # out = 'inference/output'
     # source = 'inference/images'
@@ -16,8 +21,6 @@ def detect(save_img=False,):
     # view_img = 'store_ture'
     # save_txt = 'store_true'
 
-    classification = ['POTATO_CHIP_ORIGINAL','BLACK_SUGAR_MILK_TEA','HOTSIX_THE_KING_POWER','MAMMOTH_COFFEE'] # 각 상품 별 구분
-    price = [1000,1500,2000,2500] # 각 상품별 가격표
 
     out, source, weights, view_img, save_txt, imgsz = \
         opt.output, opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size
@@ -75,7 +78,8 @@ def detect(save_img=False,):
         # Inference
         t1 = torch_utils.time_synchronized()
         pred = model(img, augment=opt.augment)[0]
-        print(pred)
+        # print(pred)
+
         # Apply NMS
         pred = non_max_suppression(pred, opt.conf_thres, opt.iou_thres,
                                    fast=True, classes=opt.classes, agnostic=opt.agnostic_nms)
@@ -106,6 +110,9 @@ def detect(save_img=False,):
 
                 # Write results
                 for *xyxy, conf, cls in det:
+                    xy.append(xyxy)
+                    print(xy[-1])
+
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         with open(save_path[:save_path.rfind('.')] + '.txt', 'a') as file:
@@ -163,8 +170,8 @@ if __name__ == '__main__':
     parser.add_argument('--source', type=str, default='0', help='source')  # file/folder, 0 for webcam
     parser.add_argument('--output', type=str, default='inference/output', help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
-    parser.add_argument('--conf-thres', type=float, default=0.7, help='object confidence threshold') #default 0.4
-    parser.add_argument('--iou-thres', type=float, default=0.7, help='IOU threshold for NMS') ##default 0.4
+    parser.add_argument('--conf-thres', type=float, default=0.4, help='object confidence threshold') #default 0.4
+    parser.add_argument('--iou-thres', type=float, default=0.4, help='IOU threshold for NMS') ##default 0.4
     parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
     parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--view-img', action='store_true', help='display results')
