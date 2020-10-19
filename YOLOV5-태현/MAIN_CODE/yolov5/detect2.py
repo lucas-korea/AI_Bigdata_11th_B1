@@ -3,17 +3,23 @@ import argparse
 from utils.datasets import *
 from utils.utils import *
 import multiprocessing
+from socket import *
+from detect2 import *
 
 # def get_coordinate():
-global xy
-
-def get_xy():
-    global xy
-    return xy[-1]
+# global xy
 
 def detect(save_img=False,):
-    global xy
-    xy = []
+    # global xy
+    # xy = []
+    port = 8080
+
+    clientSock = socket(AF_INET, SOCK_STREAM)
+    clientSock.connect(('172.16.251.16', port))
+
+    print('접속 완료')
+    # recvData = clientSock.recv(1024)
+    # print('상대방 :', recvData.decode('utf-8'))
 
     # out = 'inference/output'
     # source = 'inference/images'
@@ -110,8 +116,14 @@ def detect(save_img=False,):
 
                 # Write results
                 for *xyxy, conf, cls in det:
-                    xy.append(xyxy)
-                    print(xy[-1])
+                    # xy.append(xyxy)
+                    # print(xy[-1])
+                    _xyxy = list(xyxy)
+                    lngth = len(_xyxy)
+                    for i in range(lngth):
+                        sendData = '사람 ' +str(i)+ ' ' + str(xyxy[i])
+                        clientSock.send(sendData.encode('utf-8'))
+
 
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
