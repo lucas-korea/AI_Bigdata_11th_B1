@@ -10,16 +10,27 @@ from detect2 import *
 # global xy
 
 def detect(save_img=False,):
+    # global xy
+    # xy = []
     port = 8080
-'''소캣 접속'''
-    # clientSock = socket(AF_INET, SOCK_STREAM)
-    # clientSock.connect(('192.168.0.7', port))
-    #
-    # print('접속 완료')
+
+    clientSock = socket(AF_INET, SOCK_STREAM)
+    clientSock.connect(('172.16.251.16', port))
+
+    print('접속 완료')
+    # recvData = clientSock.recv(1024)
+    # print('상대방 :', recvData.decode('utf-8'))
+
+    # out = 'inference/output'
+    # source = 'inference/images'
+    # weights = weights
+    # view_img = 'store_ture'
+    # save_txt = 'store_true'
+
 
     out, source, weights, view_img, save_txt, imgsz = \
         opt.output, opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size
-    webcam = source == '0' or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt') #webcam = sorce 인자를 1로 주게 되면 내장 캠이 아닌 외장 캠 사용가능 단, dataset.py에서 코드수정 필요
+    webcam = source == '1' or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt') #webcam = sorce 인자를 1로 주게 되면 내장 캠이 아닌 외장 캠 사용가능 단, dataset.py에서 코드수정 필요
 
     # Initialize
     device = torch_utils.select_device(opt.device)
@@ -29,30 +40,30 @@ def detect(save_img=False,):
     half = device.type != 'cpu'  # half precision only supported on CUDA
 
     # Load model
-    # google_utils.attempt_download(weights)
+    google_utils.attempt_download(weights)
     model = torch.load(weights, map_location=device)['model'].float()  # load to FP32
-    # # torch.save(torch.load(weights, map_location=device), weights)  # update model if SourceChangeWarning
-    # # model.fuse()
-    # model.to(device).eval()
-    # if half:
-    #     model.half()  # to FP16
-    #
-    # # Second-stage classifier
+    # torch.save(torch.load(weights, map_location=device), weights)  # update model if SourceChangeWarning
+    # model.fuse()
+    model.to(device).eval()
+    if half:
+        model.half()  # to FP16
+
+    # Second-stage classifier
     classify = False
-    # if classify:
-    #     modelc = torch_utils.load_classifier(name='resnet101', n=2)  # initialize
-    #     modelc.load_state_dict(torch.load('weights/resnet101.pt', map_location=device)['model'])  # load weights
-    #     modelc.to(device).eval()
+    if classify:
+        modelc = torch_utils.load_classifier(name='resnet101', n=2)  # initialize
+        modelc.load_state_dict(torch.load('weights/resnet101.pt', map_location=device)['model'])  # load weights
+        modelc.to(device).eval()
 
     # Set Dataloader
     vid_path, vid_writer = None, None
     if webcam:
         view_img = True
         torch.backends.cudnn.benchmark = True  # set True to speed up constant image size inference
-        dataset = LoadStreams('0', img_size=imgsz) #캠 온
-    # else:
-    #     save_img = True
-    #     dataset = LoadImages(source, img_size=imgsz)
+        dataset = LoadStreams('1', img_size=imgsz) #캠 온
+    else:
+        save_img = True
+        dataset = LoadImages(source, img_size=imgsz)
 
     # Get names and colors
     names = model.names if hasattr(model, 'names') else model.modules.names
@@ -168,7 +179,7 @@ def detect(save_img=False,):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='yolov5s.pt', help='model.pt path')
-    parser.add_argument('--source', type=str, default='0', help='source')  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default='1', help='source')  # file/folder, 0 for webcam
     parser.add_argument('--output', type=str, default='inference/output', help='output folder')  # output folder
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.4, help='object confidence threshold') #default 0.4
