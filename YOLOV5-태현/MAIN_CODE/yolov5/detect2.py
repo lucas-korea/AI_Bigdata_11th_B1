@@ -6,9 +6,12 @@ import multiprocessing
 from socket import *
 from detect2 import *
 
+<<<<<<< HEAD:YOLOV5/MAIN_CODE/yolov5/detect2.py
+=======
 # def get_coordinate():
 # global xy
 
+>>>>>>> 47bb1e30a1acfd65973742e1f2cf30851bebd453:YOLOV5-태현/MAIN_CODE/yolov5/detect2.py
 def detect(save_img=False,):
     port = 8080
 '''소캣 접속'''
@@ -169,7 +172,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='yolov5s.pt', help='model.pt path')
     parser.add_argument('--source', type=str, default='0', help='source')  # file/folder, 0 for webcam
-    parser.add_argument('--output', type=str, default='inference/output', help='output folder')  # output folder
+    parser.add_argument('--output', type=str, default='inference/output', help='output foldepr')  # output folder
     parser.add_argument('--img-size', type=int, default=640, help='inference size (pixels)')
     parser.add_argument('--conf-thres', type=float, default=0.4, help='object confidence threshold') #default 0.4
     parser.add_argument('--iou-thres', type=float, default=0.4, help='IOU threshold for NMS') ##default 0.4
