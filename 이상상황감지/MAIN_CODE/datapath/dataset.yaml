@@ -1,0 +1,9 @@
+# train and val datasets (image directory or *.txt file with image paths)
+train: ../data/images/train/
+val: ../data/images/val/
+#작업 끝나면 확장자 명을 .yaml로 변경
+# number of classes
+nc: 3
+
+# class names
+names: ['NV','V', 'F']
