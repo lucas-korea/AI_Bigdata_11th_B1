@@ -1,16 +1,13 @@
-# AI_Bigdata_11th_B1
+# POCTV (intelligence CCTV)
 포스코 AI Bigdata 11기 B1조 입니다 :)
 
-우리는 지능형 CCTV 개발을 목표로 하고 있습니다
+### Preview
+![ㅆ](https://user-images.githubusercontent.com/57425658/102691314-d9916980-424e-11eb-95ec-08ac44af0f83.png)
 
-저희 내용을 보고 싶으면 powerpoint를 봐보세요
 
-조장 : 정찬영
-노태현
-황다빈
-정종훈
-김동현
-김보민
+![image](https://user-images.githubusercontent.com/57425658/102691358-3856e300-424f-11eb-8001-97793411a0d1.png)
+
+
 
 이상상황 감지 
 : yolov5를 이용하여 폭력상황, 실신 상황, 정상상황을 학습시켜서 각 상황을 인식합니다
