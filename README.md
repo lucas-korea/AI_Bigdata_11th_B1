@@ -1,8 +1,11 @@
 # POCTV (intelligence CCTV)
 포스코 AI Bigdata 11기 B1조 입니다 :)
 
-###Preview
+### Preview
 ![ㅆ](https://user-images.githubusercontent.com/57425658/102691314-d9916980-424e-11eb-95ec-08ac44af0f83.png)
+
+
+![image](https://user-images.githubusercontent.com/57425658/102691358-3856e300-424f-11eb-8001-97793411a0d1.png)
 
 
 
