@@ -4,10 +4,9 @@
 ### Preview
 ![ㅆ](https://user-images.githubusercontent.com/57425658/102691314-d9916980-424e-11eb-95ec-08ac44af0f83.png)
 
-
 ![image](https://user-images.githubusercontent.com/57425658/102691358-3856e300-424f-11eb-8001-97793411a0d1.png)
 
-
+![violence](https://github.com/lucas-korea/AI_Bigdata_11th_B1/blob/master/ezgif-3-4f52388ae637.gif)
 
 이상상황 감지 
 : yolov5를 이용하여 폭력상황, 실신 상황, 정상상황을 학습시켜서 각 상황을 인식합니다
