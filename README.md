@@ -1,8 +1,6 @@
 # POCTV (intelligence CCTV)
 포스코 AI Bigdata 11기 B1조 입니다 :)
 
-우리는 지능형 CCTV 개발을 목표로 하고 있습니다
-
 ###Preview
 ![ㅆ](https://user-images.githubusercontent.com/57425658/102691314-d9916980-424e-11eb-95ec-08ac44af0f83.png)
 
