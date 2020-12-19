@@ -6,6 +6,11 @@
 ## data referece and example 
 ![image](https://user-images.githubusercontent.com/57425658/102691358-3856e300-424f-11eb-8001-97793411a0d1.png)
 
+situation list
+*V = Violence(폭력상황)
+*F = Faint(실신상황)
+*NV = Non Violence(정상상황)
+
 ### YOLO training result
 ![image](https://user-images.githubusercontent.com/57425658/102692435-802d3880-4256-11eb-9fde-fb7e07fad222.png)
 
